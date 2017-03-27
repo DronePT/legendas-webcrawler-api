@@ -2,7 +2,7 @@ require('dotenv').config()
 
 import request from 'request-promise'
 import htmlToText from 'html-to-text'
-// import { Iconv } from 'iconv'
+import iconv from 'iconv-lite'
 
 const debug = require('debug')('legendas-divx:libs')
 
@@ -47,13 +47,10 @@ const LegendasDivx = (function () {
         id
       ] = m.map((match, groupIndex) => match)
 
-      // const iconv = new Iconv('UTF-8', 'ISO-8859-15//TRANSLIT')
-      // const iconv = new Iconv('ISO-8859-15', 'UTF8//TRANSLIT//IGNORE')
       const description = htmlToText.fromString(
         descriptionInHTML,
         { wordwrap: 130 }).toString('utf8'
       )
-      // debug(iconv.convert(description).toString())
 
       const language = lang.split('/').pop()
 
@@ -71,6 +68,7 @@ const LegendasDivx = (function () {
         description,
         download: `${LD_DOWNLOAD_URL}${id}`
       }
+
       subtitles.push(subtitle)
     }
 
@@ -86,8 +84,8 @@ const LegendasDivx = (function () {
       form: { query },
       headers: { 'User-Agent': USER_AGENT },
       transform: (body, response) => {
-        debug(response.headers)
-        return body
+        // set right text encoding
+        return iconv.decode(body, 'ISO-8859-15').toString()
       }
     }
 

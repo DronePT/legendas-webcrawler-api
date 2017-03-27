@@ -7,7 +7,7 @@
   "author": "Andre Alves <andre.alves@polygon.pt>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env DEBUG=legendas-divx:server,legendas-divx:libs,legendas-divx:app nodemon index.js",
+    "dev": "cross-env DEBUG=legendas-divx:* nodemon index.js",
     "eslint-init": "eslint --init"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "express": "^4.15.2",
     "helmet": "^3.5.0",
     "html-to-text": "^3.2.0",
-    "iconv": "^2.2.1",
+    "iconv-lite": "^0.4.15",
     "morgan": "^1.8.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.0",
