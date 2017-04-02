@@ -15,6 +15,8 @@ const LegendasDivx = (function () {
 
     const m = regex.exec(data)
 
+    if (!m) return 0
+
     m.splice(0, 1)
 
     const [ totalPages ] = m.map(_ => _)
